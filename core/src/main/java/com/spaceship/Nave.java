@@ -16,6 +16,10 @@ public class Nave {
 	float x;
 	float y;
 	float speed = 6;
+	float xBound;
+	float yBound;
+	float width;
+	float height;
 	
 //	public Nave(String sprite,int x, int y) {
 //		this.sprite = new Texture(sprite);
@@ -36,6 +40,11 @@ public class Nave {
 	        
 	        this.x = x;
 	        this.y = y;    
+	        this.width = width;
+	        this.height = height;
+	        this.xBound = x +this.width;
+	        this.yBound = y +this.height;
+	      
 	}
 	
 	public void moveNave() {
@@ -74,14 +83,18 @@ public class Nave {
 	public void atualizarAnima(float delta) {
         animationDelay += delta;
         
+        
+        this.xBound = x + width;
+        this.yBound = y + height;
 
     }
 	
 	public void renderAnimation(SpriteBatch batch) {
 		  TextureRegion frameAtual = animation.getKeyFrame(animationDelay, true);
-		  batch.draw(frameAtual, x, y);
+		 
 		  
-		
+		  batch.draw(frameAtual, x , y );
+		  
 		
 	}
 	
@@ -93,6 +106,19 @@ public class Nave {
 	public float getY() {
 		return y;
 	}
+	
+	public float getWidth() {
+		return width;
+	
+	}
+	public float getHeight() {
+		return height;
+	
+	}
+	
+	
+	
+	
 	
 	
 }
