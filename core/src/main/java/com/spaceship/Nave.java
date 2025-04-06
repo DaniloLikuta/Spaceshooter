@@ -15,7 +15,7 @@ public class Nave {
 	
 	float x;
 	float y;
-	float speed = 6;
+	float speed = 3;
 	float xBound;
 	float yBound;
 	float width;
