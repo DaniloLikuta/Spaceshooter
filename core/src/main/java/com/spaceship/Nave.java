@@ -20,13 +20,11 @@ public class Nave {
 	float yBound;
 	float width;
 	float height;
+	float coolDown;
+	float coolDownMax = 0.8f;
 	
-//	public Nave(String sprite,int x, int y) {
-//		this.sprite = new Texture(sprite);
-//		this.x = x;
-//		this.y = y;
-//			
-//	}
+	
+	
 	public Nave(String sprite, int width, int height, int numOfFrames, float x,  float y) {
 		this.sprite = new Texture(Gdx.files.internal(sprite));
 		TextureRegion[][] frames = TextureRegion.split(this.sprite, width, height);
@@ -64,17 +62,19 @@ public class Nave {
 		
 	}
 	public boolean ShootNave(){
-		if(Gdx.input.isKeyPressed(Input.Keys.S)) {
+		if(Gdx.input.isKeyPressed(Input.Keys.S) && coolDown <= 0) {
+		coolDown = coolDownMax;
 		return true;
 		}
 		return false;
 	}
 	
+	private void coolDownUpdate() {
+		this.coolDown -= 0.05f;
+		
+	}
 	
-//	public void renderNave(SpriteBatch batch) {
-//		batch.draw(sprite, x, y);
-//		
-//	}
+
 	
 	public void dispose() {
 		sprite.dispose();
@@ -86,7 +86,7 @@ public class Nave {
         
         this.xBound = x + width;
         this.yBound = y + height;
-
+        coolDownUpdate();
     }
 	
 	public void renderAnimation(SpriteBatch batch) {
